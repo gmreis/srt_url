@@ -1,0 +1,34 @@
+{
+  "name": "srt_url",
+  "version": "0.1.0",
+  "description": "Encurtador de URL",
+  "main": "loader.js",
+  "scripts": {
+    "dev": "nodemon",
+    "production": "pm2 start loader.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gmreis/srt_url.git"
+  },
+  "keywords": [
+    "nodejs",
+    "mongo",
+    "short_url"
+  ],
+  "author": "Geraldo Mateus Reis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gmreis/srt_url/issues"
+  },
+  "homepage": "https://github.com/gmreis/srt_url#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.3",
+    "pm2": "^2.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
