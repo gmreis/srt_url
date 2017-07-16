@@ -7,7 +7,7 @@ module.exports = function(server) {
 
   server.use('/', router)
 
-  const urlService = require('../api/urlService')
+  const urlService = require('../api/url/urlService')
   // GET /:urlId
   router.route('/:urlId').get(urlService.redirectUrl)
   // GET /stats
@@ -15,9 +15,9 @@ module.exports = function(server) {
   // GET /stats/:id
   router.route('/stats/:urlId').get(urlService.statsOneUrl)
   // DELETE /urls/:id
-  router.route('/:urlId').delete(urlService.delete)
+  router.route('/:urlId').delete(urlService.remove)
 
-  const userService = require('../api/userService')
+  const userService = require('../api/user/userService')
   // POST /users/:userid/urls
   router.route('/users/:userId/urls').post(userService.addUrl)
   //GET /users/:userId/stats
@@ -25,6 +25,6 @@ module.exports = function(server) {
   //POST /users
   router.route('/users').post(userService.add)
   // DELETE /user/:userId
-  router.route('/user/:userId').delete(userService.delete)
+  router.route('/user/:userId').delete(userService.remove)
 
 }

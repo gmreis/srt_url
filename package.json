@@ -4,7 +4,8 @@
   "description": "Encurtador de URL",
   "main": "loader.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon",
+    "production": "pm2 start loader.js"
   },
   "repository": {
     "type": "git",
