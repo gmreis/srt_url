@@ -16,10 +16,8 @@ function addUrl(req, res) {
       } else {
 
         Url.nextCount(function(err, count) {
-          //url.setShortUrl(req.hostname, count);
 
           var shortUrl = Url.calcShortUrl(count);
-
           var url = new Url({
             url: req.body.url,
             userId: user._id,
@@ -28,11 +26,13 @@ function addUrl(req, res) {
           })
 
           Url.create(url, function(err, result) {
-            if(err)
+            if(err){
+              console.error(err);
               res.status(409).end();
-
-            res.setHeader('Content-Type', 'application/json');
-            res.status(201).end(url.responseJSON(req.hostname, server.get('port')));
+            } else {
+              res.setHeader('Content-Type', 'application/json');
+              res.status(201).end(JSON.stringify(url.responseJSON(req.hostname, server.get('port'))));
+            }
           });
         });
       }

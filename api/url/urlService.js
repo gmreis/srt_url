@@ -1,4 +1,5 @@
 const Url = require('./urlModel');
+const server = require('../../config/server')
 
 // GET /:urlId
 function redirectUrl(req, res) {
@@ -48,6 +49,43 @@ function redirectUrl(req, res) {
 
 // GET /stats
 function stats(req, res) {
+  var stats = {};
+
+  Url.aggregate([
+    {$group: {_id: null, totalHits: {$sum: "$hits"}, urlCount: {$sum: 1}}}
+  ], function (err, result){
+    if(err) {
+      console.error(err);
+    } else {
+
+      stats.hits = result[0].totalHits;
+      stats.urlCount = result[0].urlCount;
+      stats.topUrls = [];
+
+      Url.aggregate([
+        { $sort: { hits: -1 } }, { $limit: 10 }
+      ], function (err, result) {
+
+        if(err) {
+          console.error(err);
+        } else {
+
+          console.log('funcionou... =D');
+          console.dir(result);
+
+          for(var i=0; i<result.length; i++) {
+            stats.topUrls.push(new Url(result[i]).responseJSON(req.hostname, server.get('port')));
+          }
+
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify(stats));
+
+        }
+      });
+
+
+    }
+  })
 
 }
 

@@ -4,23 +4,24 @@ const url = require('url')
 module.exports = function(server) {
 
   server.use(function(req, res, next) {
-    if(req.method === 'GET' && req.url.indexOf('/users') != 0 && req.url.indexOf('/stats') != 0) {
+    if(req.method === 'GET' && req.url.indexOf('/urls') == 0 ) {
       next();
-    } else if(req.headers['content-type'] == 'application/x-www-form-urlencoded') {
+    } else if(req.headers['content-type'] == 'application/json') {
       next()
     } else {
-      res.status(404).end('Errado');
+      res.status(406).end();
     }
   })
-  
+
   // API Routes
   const router = express.Router()
 
   server.use('/', router)
 
   const urlService = require('../api/url/urlService')
-  // GET /:urlId
-  router.route('/:urlId').get(urlService.redirectUrl)
+
+  // GET /urls/:urlId
+  router.route('/urls/:urlId').get(urlService.redirectUrl)
   // GET /stats
   router.route('/stats').get(urlService.stats)
   // GET /stats/:id

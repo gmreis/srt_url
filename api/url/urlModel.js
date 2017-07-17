@@ -10,15 +10,15 @@ const urlSchema = new mongoose.Schema({
 })
 
 urlSchema.methods.responseJSON = function (hostname, port) {
-  return JSON.stringify({
+  return {
       "id": this.urlId,
       "hits": this.hits,
       "url": this.url,
-      "shortUrl": 'http://'+hostname+':'+port+'/'+this.shortUrl
-    })
+      "shortUrl": 'http://'+hostname+':'+port+'/urls/'+this.shortUrl
+    };
 }
 
-urlSchema.plugin(autoIncrement.plugin, { model: 'Url', field: 'urlId' });
+urlSchema.plugin(autoIncrement.plugin, { model: 'Url', field: 'urlId', startAt: 1, incrementBy: 1});
 module.exports = mongoose.model('Url', urlSchema);
 
 module.exports.calcUrlId = function (shortUrl) {
