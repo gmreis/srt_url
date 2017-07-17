@@ -24,10 +24,10 @@ module.exports = function(server) {
   router.route('/urls/:urlId').get(urlService.redirectUrl)
   // GET /stats
   router.route('/stats').get(urlService.stats)
-  // GET /stats/:id
+  // GET /stats/:urlId
   router.route('/stats/:urlId').get(urlService.statsOneUrl)
-  // DELETE /urls/:id
-  router.route('/:urlId').delete(urlService.remove)
+  // DELETE /urls/:urlId
+  router.route('/urls/:urlId').delete(urlService.remove)
 
   const userService = require('../api/user/userService')
   // POST /users/:userId/urls

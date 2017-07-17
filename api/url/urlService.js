@@ -70,9 +70,6 @@ function stats(req, res) {
           console.error(err);
         } else {
 
-          console.log('funcionou... =D');
-          console.dir(result);
-
           for(var i=0; i<result.length; i++) {
             stats.topUrls.push(new Url(result[i]).responseJSON(req.hostname, server.get('port')));
           }
@@ -92,11 +89,44 @@ function stats(req, res) {
 // GET /stats/:id
 function statsOneUrl(req, res) {
 
+  if(req.params.hasOwnProperty('urlId')) {
+
+    var urlId = Url.calcUrlId(req.params.urlId);
+
+    Url.findOne({urlId: urlId}, function(err, url){
+      if(err)
+        res.status(409).end();
+      if(url == null){
+        res.status(404).end();
+      } else {
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(url.responseJSON(req.hostname, server.get('port'))));
+      }
+    });
+
+  } else {
+    res.status(406).end();
+  }
+
 }
 
-// DELETE /urls/:id
+// DELETE /urls/:urlId
 function remove(req, res) {
+  if(req.params.hasOwnProperty('urlId')) {
 
+    Url.remove({urlId: req.params.urlId}, function(err) {
+      if(err) {
+        console.error('Url não removida. urlId: ' + req.params.urlId);
+        res.status(404).end();
+      } else {
+        console.log("Delete URL...");
+        res.end(JSON.stringify({}));
+      }
+    })
+
+  } else {
+    res.status(406).end();
+  }
 }
 
 module.exports = {redirectUrl, stats, statsOneUrl, remove}
