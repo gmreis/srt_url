@@ -1,5 +1,6 @@
 const User = require('./userModel');
 const Url = require('../url/urlModel')
+const server = require('../../config/server')
 
 // POST /users/:userid/urls
 function addUrl(req, res) {
@@ -13,21 +14,25 @@ function addUrl(req, res) {
       if(user == null){
         res.status(404).end();
       } else {
-        var url = new Url({
-          url: req.body.url,
-          userId: user._id,
-          hits: 0
-        })
 
         Url.nextCount(function(err, count) {
-          url.setShortUrl(req.hostname, count);
+          //url.setShortUrl(req.hostname, count);
+
+          var shortUrl = Url.calcShortUrl(count);
+
+          var url = new Url({
+            url: req.body.url,
+            userId: user._id,
+            shortUrl: shortUrl,
+            hits: 0
+          })
 
           Url.create(url, function(err, result) {
             if(err)
               res.status(409).end();
 
             res.setHeader('Content-Type', 'application/json');
-            res.status(201).end(url.responseJSON());
+            res.status(201).end(url.responseJSON(req.hostname, server.get('port')));
           });
         });
       }
