@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Promise = require('q');
-mongoose.set('debug', true);
 
 const userSchema = new mongoose.Schema({
   user: { type: String, required: true},

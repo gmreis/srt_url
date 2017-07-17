@@ -4,17 +4,15 @@ const url = require('url')
 module.exports = function(server) {
 
   server.use(function(req, res, next) {
-    if(req.url != '/:urlId' && req.headers['content-type'] != 'application/x-www-form-urlencoded') {
-      console.log('Protocolo: ' + req.headers['content-type']);
-      console.log('URL: ' + req.url);
-      console.log('Recusado...');
-      res.status(404).end();
-    } else {
+    if(req.method === 'GET' && req.url.indexOf('/users') != 0 && req.url.indexOf('/stats') != 0) {
       next();
+    } else if(req.headers['content-type'] == 'application/x-www-form-urlencoded') {
+      next()
+    } else {
+      res.status(404).end('Errado');
     }
   })
-
-
+  
   // API Routes
   const router = express.Router()
 
