@@ -15,6 +15,12 @@ function redirectUrl(req, res) {
         res.status(404).end();
       } else {
         res.redirect(url.url);
+        Url.update({_id: url._id},
+          {$set: {hits: (url.hits+1)}},
+          function(err, url){
+            if(err)
+              console.error('Erro ao adicionar o hits: shorUrl: '+req.params.urlId);
+        });
         //var temp = new Date - inicio;
         //console.log('Tempo: ' + temp);
         //console.log('URL: ' + url.url);
