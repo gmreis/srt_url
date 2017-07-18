@@ -10,10 +10,10 @@ Instalando e colocando para trabalhar
 
 O projeto pode ser instalado em qualquer OS, basta fazer a instalação do NodeJS e MongoDB.
 
-Para facilitar a vida dos usuários Linux, fiz dois scripts para fazer a instalação e iniciar o sistema.
+Para facilitar a vida dos usuários Linux, fiz dois scripts. Um para fazer a instalação do NodeJS, MongoDB, fazer um `clone` do projeto e outro para iniciar o sistema.
 Sendo assim, baixem o instalador install.sh e o start.sh.
 
-### Instalação
+### Instalação com Script
 
 Execute os seguintes comandos para executar o install.sh.
 ```
@@ -21,10 +21,30 @@ chmod +x install.sh
 sudo ./install.sh
 ```
 
+### Execução com Script
+
 Após a conclusão dos scripts install.sh, é só rodar o start.sh da mesma maneira para iniciar o mesmo.
 ```
 chmod +x start.sh
 sudo ./start.sh
+```
+
+### Instalação sem Script
+
+Para instalar sem os arquivos de script fornecidos, em uma base com Windows, por exemplo, você precisará ter o NodeJS, MongoDB e uma cópia do projeto, podendo ser utilizando o Git ou simplesmente baixando pelo site.
+
+Após possuir uma cópia do projeto na sua base, entre dentro da pasta do projeto e execute os seguintes comandos:
+```
+npm install
+npm install -g pm2
+```
+PRONTO!!! Todas as dependências do projeto serão baixadas automaticamente e o modulo `pm2` estará instalado de forma global para executar iniciar o projeto.
+
+### Execução sem Script
+
+Para executar o projeto, dentro da pasta raiz do projeto, execute o seguinte comando:
+```
+pm2 start loader.js
 ```
 
 Configurações Iniciais
