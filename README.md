@@ -37,3 +37,15 @@ Continuando na pasta `config`, o servidor tem a porta 3003 configurada como padr
 
 Utilizando a API
 -----------------
+
+Possuimos alguns metodos RESTful com `Content-Type: application/json` para fazer o cadastro, exclusão e consulta de status dos usuários e urls.
+
+### Metodos para os Usuários
+
+`POST /users`
+Método utilizado para cadastrar novos uuários. Recebe como parametro um objeto JSON contendo o `id` do usuário. Como resposta, é retornado o objeto cadastrado com o código `201 Created`. Caso já tenha um usuário com o mesmo `id`, é retornado o código `409 Conflict`.
+```
+{
+  "id": "joao"
+}
+```
