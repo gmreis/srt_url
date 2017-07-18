@@ -5,6 +5,8 @@ Apenas o método de acesso a URL original utilizando a URL encurtada pode ser ac
 
 Utilizamos uma arquitetura simples no projeto, contendo uma pasta API, onde se tem os modelos e middleware, e a pasta CONFIG, onde é cadastrado as rotas, configurações do servidor e banco de dados.
 
+O projeto utiliza o modulo Cluster do NodeJS, sempre criando o mesmo número de instancias de acordo com o número de núcleos da CPU.
+
 Instalando e colocando para trabalhar
 -------------------------------------------
 
