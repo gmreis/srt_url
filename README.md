@@ -1,14 +1,29 @@
-# srt_url
+# Encurtador de URL
+===================
 
-# Instalando a API e colocando para trabalhar
-Baixe o instalador install.sh e o start.sh em seu OS.
+Encurtador de URL utilizando NodeJS e MongoDB.
 
-Execute os seguintes comando para executar o instalado.
-chmod +x filename.sh
-sudo ./filename.sh
+Instalando e colocando para trabalhar
+-------------------------------------------
 
-Após tudo concluido, é só rodar o start.sh da mesma maneira.
-chmod +x filename.sh
-sudo ./filename.sh
+O projeto pode ser instalado em qualquer OS, basta fazer a instalação do NodeJS e MongoDB.
 
-# Utilizando a API
+Para facilitar a vida dos usuários Linux, fiz dois scritps para fazer a instalação e iniciar o sistema.
+Sendo assim, baixem o instalador install.sh e o start.sh.
+
+### Instalação
+
+Execute os seguintes comandos para executar o install.sh.
+```
+chmod +x install.sh
+sudo ./install.sh
+```
+
+Após a conclusão dos scripts install.sh, é só rodar o start.sh da mesma maneira para iniciar o mesmo.
+```
+chmod +x start.sh
+sudo ./start.sh
+```
+
+Utilizando a API
+-----------------
